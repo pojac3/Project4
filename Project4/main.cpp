@@ -28,7 +28,7 @@ public:
     int Root();
     void setRoot(int rootNode);
     void setParent(int node, int parent);
-    void nodesAtLevel(int node);
+    void nodesAtLevel(int level);
     int Level(int node);
     int height();
     //void Preorder();
@@ -95,7 +95,56 @@ void Tree::printParent(int node) {
 int Tree::Parent(int node) {
     return data[node];
 }
-//blah
+
+//prints the children of the given node
+void Tree::printChildren(int node) {
+    for (int i = 0; i < size() - 1; i++) {
+        if (Parent(i) == node) {
+            cout << node << " ";
+        }
+    }
+}
+
+//prints the siblings of the given node
+void Tree::printSiblings(int node) {
+    for (int i = 0; i < size() - 1; i++) {
+        if (Parent(i) == Parent(node)) {
+            cout << node << " ";
+        }
+    }
+}
+
+//gives the Root of the tree in int format
+int Tree::Root() {
+    int _root = -1;
+    
+    for (int i = 0; i < size() -1; i++) {
+        if (data[i] == -1) {
+            _root = i;
+        }
+    }
+    
+    return _root;
+}
+
+//sets the root of the tree to the specified node
+void Tree::setRoot(int rootNode) {
+    data[rootNode] = -1;
+}
+
+//sets the parent of the node to the specified node
+void Tree::setParent(int node, int parent) {
+    data[node] = parent;
+}
+
+//prints out all the nodes at the specified level
+void Tree::nodesAtLevel(int level) {
+    for (int i = 0; i < size() - 1; i++) {
+        if (Level(i) == level) {
+            cout << data[i] << " ";
+        }
+    }
+}
 
 int main() {
     
