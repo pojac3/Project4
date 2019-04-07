@@ -95,7 +95,6 @@ void Tree::printParent(int node) {
 int Tree::Parent(int node) {
     return data[node];
 }
-//what about this
 
 
 int main() {
