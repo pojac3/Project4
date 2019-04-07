@@ -52,6 +52,14 @@ Tree::Tree(int numberOfNodes) {
     _size = numberOfNodes;
 };
 
+Tree::Tree(Tree const &toBeCopied) {
+    data = new int[toBeCopied._size];
+    _size = toBeCopied._size;
+    for (int i = 0; i < _size; i++) {
+        data[i] = toBeCopied.data[i];
+    }
+};
+
 Tree::~Tree() {
 };
 
@@ -191,11 +199,9 @@ int main() {
     cout << "The tree that we just read is: " << endl;
     cout << (*myTree) << endl;
     
-    /*
     Tree* newTree = new Tree(*myTree);
     cout << "The tree that we just copied is: " << endl;
-    cout << (newTree) << endl;
-    */
+    cout << (*newTree) << endl;
      
     cout << "The root of the tree is: " << (*myTree).Root() << endl;
     
@@ -235,7 +241,7 @@ int main() {
     */
      
     delete myTree;
-//    delete newTree;
+    delete newTree;
     
     return 0;
 }
