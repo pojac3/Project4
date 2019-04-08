@@ -193,55 +193,80 @@ int Tree::Level(int node) {
 
 //returns the height of the tree
 int Tree::height() {
+    //the height of the current node
     int currentHeight = 1;
+    //the tallest height weve found so far
     int tallestHeight = 1;
+    //the current node we are on
     int currentNode = 0;
+    
+    //looping through the data array
     for (int i = 0; i < size(); i++) {
+        //so long as we arent past the root
         while (currentNode != -1) {
+            //get the parent of the current node
             currentNode = Parent(currentNode);
+            //and increment the current height
             currentHeight++;
         }
+        //comparing the height from the current node to the tallest one found so far
         if (currentHeight > tallestHeight) {
+            //change it if its different
             tallestHeight = currentHeight;
         }
+        //reset the current height
         currentHeight = 1;
     }
+    //returning the tallest one found
     return tallestHeight;
 }
 
 //returns the size of the array, which is also equivalent to the number of nodes in the tree
 int Tree::size() {
+    //returning the size
     return _size;
 }
 
 int main() {
+    //instantiating variables
     Tree* myTree;
     int numNodes,node,parent;
     
+    //getting the total number of nodes
     cin >> numNodes;
+    //creating the tree with that number of nodes
     myTree = new Tree(numNodes);
     
+    //this loop gets a parent for each node
     for (int i = 0; i < numNodes; i++) {
+        //taking it in
         cin >> node >> parent;
+        //setting the parent
         (*myTree).setParent(node, parent);
         if (parent == -1) {
+            //using the set root method for the one whos parent is -1
             (*myTree).setRoot(node);
         }
     }
     
+    //testing that we read the tree properly
     cout << "The tree that we just read is: " << endl;
     cout << (*myTree) << endl;
     
+    //testing that the copy constructor works
     Tree* newTree = new Tree(*myTree);
     cout << "The tree that we just copied is: " << endl;
     cout << (*newTree) << endl;
      
+    //testing that the root method works
     cout << "The root of the tree is: " << (*myTree).Root() << endl;
     
+    //testing that LCA works
     cout << "The least common ancestor of nodes 3 and 8 is: " << (*myTree).LCA (3,8) << endl;
     cout << "The least common ancestor of nodes is: " << (*myTree).LCA (13,8) << endl;
     cout << "The least common ancestor of nodes is: " << (*myTree).LCA (13,11) << endl;
     
+    //testing that the children method works
     cout << "The children of node 12 is/are: " << endl; 
     (*myTree).printChildren(12);
     cout << endl;
@@ -250,6 +275,7 @@ int main() {
     (*myTree).printChildren(10);
     cout << endl;
     
+    //testing that the siblings method works
     cout << "The siblings of node 3 is/are: " << endl; 
     (*myTree).printSiblings(3);
     cout << endl;
@@ -257,24 +283,30 @@ int main() {
     cout << "The siblings of node 12 is/are: " << endl; 
     (*myTree).printSiblings(12);
     cout << endl;
-
+    
+    //testing that nodesAtLevel works
     cout << "The nodes at level 3 is/are: " << endl; 
     (*myTree).nodesAtLevel(3);
     cout << endl;
     
+    //testing that the height method works
     cout << "The height of the tree is: " << (*myTree).height() << endl;
     
+    //testing that the Level method works
     cout << "The level of node 3 in the tree is: " << (*myTree).Level(3) << endl;
     cout << "The level of node 12 in the tree is: " << (*myTree).Level(12) << endl;
     
+    //testing that preorder works
     /*
     cout << "The preorder traversal of the tree is/are" << endl;
     (*myTree).Preorder();
     cout << endl;
     */
      
+    //deleting the trees at the end of the program
     delete myTree;
     delete newTree;
     
+    //returing 0
     return 0;
 }
