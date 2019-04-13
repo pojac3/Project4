@@ -2,7 +2,7 @@
 //  main.cpp
 //  Project4
 //
-//  Created by Jacob Courtney on 3/31/19.
+//  Created by Jacob Courtney on 3/31/19 for CS 2413 at the University of Oklahoma.
 //  Copyright © 2019 Jacob Courtney. All rights reserved.
 //
 
