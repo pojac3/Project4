@@ -31,10 +31,11 @@ public:
     void nodesAtLevel(int level); //prints all of the nodes at the specified level to the console
     int Level(int node); //finds the level of the specified node and returns it as an int
     int height(); //returns the height of the tree as an int
-    //void Preorder(); //prints the preorder traversal of the tree to the console
+    void Preorder(); //prints the preorder traversal of the tree to the console
     
     //helper methods
     int size(); //returns the number of nodes in the tree, which is equivalent to the size of the data array, as an int
+    void preorderOnNode(int node); //helper method for the Preorder method
 protected:
     int _size; //stores the number of nodes in the tree
     int* data; //main array that stores the tree
@@ -179,6 +180,26 @@ void Tree::nodesAtLevel(int level) {
     }
 }
 
+//helper method for Preorder
+void Tree::preorderOnNode(int node) {
+    //printing out the current node
+    cout << node << " ";
+    //loops through and prints the childrens preorder traversals from smallest to biggest
+    for (int i = 0; i < size(); i++) {
+        //if this node is the parent of node i
+        if (Parent(i) == node) {
+            //then recursively call this method
+            preorderOnNode(i);
+        }
+    }
+}
+
+//prints out the preorder traversal of the tree
+void Tree::Preorder() {
+    //simply starts the preorder recursive traversal at the root
+    preorderOnNode(Root());
+}
+
 //returns the level of the given node. Recursive
 int Tree::Level(int node) {
     //if we are at the root node..
@@ -297,11 +318,9 @@ int main() {
     cout << "The level of node 12 in the tree is: " << (*myTree).Level(12) << endl;
     
     //testing that preorder works
-    /*
     cout << "The preorder traversal of the tree is/are" << endl;
     (*myTree).Preorder();
     cout << endl;
-    */
      
     //deleting the trees at the end of the program
     delete myTree;
